@@ -1,9 +1,10 @@
 #! /usr/bin/python
 # -*- encoding:utf-8 -*-
-import re;
-import urllib;
-import urllib2;
-import sys;
+import re
+import urllib
+import urllib2
+import sys
+import os
 
 #BEGIN
 
@@ -85,13 +86,15 @@ def dict_it(word):
 	xml = crawl_xml(" ".join(argv));
 	print_translations(xml, True, False);
 
-def main():
-	file=open('input.txt')
+def main(file):
+	path=os.getcwd()
+	file=open(file)
+	sys.stdout=open(path+'/outfile.txt','w')
 	for line in file:
 		dict_it(line)
 		print('---------------------------------')
 
 if __name__ == "__main__":
-	sys.stdout=open('outfile.txt','w')
-	main();
+	file=raw_input('file>>')
+	main(file);
 
